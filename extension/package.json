@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tanyew3st/equity-extension/issues"
   },
-  "homepage": "https://github.com/tanyew3st/equity-extension#readme"
+  "homepage": "https://github.com/tanyew3st/equity-extension#readme",
+  "dependencies": {
+    "ntcjs": "^1.1.2"
+  }
 }
