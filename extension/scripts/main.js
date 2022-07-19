@@ -1,4 +1,4 @@
-import { convertMain } from './converter.js'
+// import { convertMain } from './converter.js'
 
 function display_h1 (results){
     console.log(results);
@@ -51,7 +51,7 @@ const fetchClasses = () => {
 }
 window.onload = (event) => {
     convertMain();
-    fetchClasses();
-    slider();
+    // fetchClasses();
+    // slider();
     console.log(event);
 }
