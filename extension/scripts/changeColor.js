@@ -2663,6 +2663,7 @@ function updatedColor(color){
     //get the color name of the hex passed in 
     let colorBreakDown = ntc.name(color);
     let shadeColor = colorBreakDown[3];
+    console.log(shadeColor)
     //check if color is green
     if(shadeColor == 'Green') {
         let rgbValueGreen = HEXtoRGB(color)
@@ -2670,12 +2671,22 @@ function updatedColor(color){
         let gValueGreen = rgbValueGreen[1];
         let bValueGreen = rgbValueGreen[2];
         updatedColor = greenToRed(rValueGreen, gValueGreen, bValueGreen);
+    } else if (color == '#E3FCF7') {
+        updatedColor = '#F7E2E2'
+    } else if (color == '016BF8') {
+        updatedColor = '#DB3030' 
+    } else if (color == '1254B7') {
+        updatedColor = '#970606'
+    } else if (color == 'C3E7FE') {
+        updatedColor = '#FFE1E9'
+    } else if (color == 'E1F7FF') {
+        updatedColor = '#FEC3C3'
     } else {
         updatedColor = color;
     }
     return updatedColor;
 }
-console.log(updatedColor('#5dbb63'));
+console.log(updatedColor('#E3FCF7'));
 
 function greenToRed(greenR, greenG, greenB) {
     let XYZ = RGBtoXYZ(greenR,greenG,greenB)
@@ -2775,3 +2786,5 @@ function HEXtoRGB(hexIn){
     let answer4 = Color.hexToRgb(hexIn);
     return answer4
 }
+
+
