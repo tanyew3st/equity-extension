@@ -56,9 +56,9 @@ const fetchClasses = () => {
     }
 
 }
-
 window.onload = (event) => {
     convertMain();
     fetchClasses();
+    slider();
     console.log(event);
 }
