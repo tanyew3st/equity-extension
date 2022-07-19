@@ -27,6 +27,12 @@ export function greenToRed(greenR, greenG, greenB) {
     let redZ = redXYZ[2];
 
     let redRGB = XYZtoRGB(redX, redY, redZ)
+    let redR = redRGB[0];
+    let redG = redRGB[1];
+    let redB2 = redRGB[2];
+    let redHex = RGBtoHEX(redR, redG, redB2);
+
+    return redHex
 
     console.log(redRGB);
 }
@@ -88,6 +94,11 @@ function LABtoXYZ(l, a, b){
 function XYZtoRGB(x, y, z){
     let answer2 = Color.xyzToRgb([x, y, z]);
     return answer2
+}
+
+function RGBtoHEX(r, g, b){
+    let answer3 = Color.rgbToHex([r, g, b]);
+    return answer3
 }
 
 
