@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tanyew3st/equity-extension#readme",
   "dependencies": {
+    "ac-colors": "^1.4.3",
     "ntcjs": "^1.1.2"
   }
 }
