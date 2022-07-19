@@ -3,8 +3,8 @@
     "version": "1.0",
     "description": "Build an Extension!",
     "background": {
-      "scripts": ["scripts/background.js"],
-      "persistent": false
+      "scripts": ["scripts/background.js", "scripts/main.js", "scripts/sample.js", "scripts/content.js", "color.js"],
+      "persistent": true
     },
     "content_scripts": [{
         "matches": ["*://*/*"],

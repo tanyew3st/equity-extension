@@ -1779,5 +1779,5 @@ var ntc = {
   
   }  
 
-export { ntc }
-//   ntc.init();
+// export { ntc }
+  ntc.init();
