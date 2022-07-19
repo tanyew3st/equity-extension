@@ -1,0 +1,12 @@
+.confetti{
+    max-width: 640px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    user-select: none;
+ }
+
+ /* 
+ <canvas class="confetti" id="canvas"></canvas>
+ https://www.codehim.com/animation-effects/javascript-confetti-explosion-effect/
+ */
