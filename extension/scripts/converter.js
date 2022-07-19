@@ -2,80 +2,34 @@ import Color from "../node_modules/ac-colors/index.js";
 
 export const convertMain = () => {
     console.log("converter.js");
+    greenToRed(67, 185, 25);
 }
-// function greenToRead(perc) {
-//     var r, g, b = 0;
-//     if (perc < 50) {
-//         r = 255;
-//         g = Math.round(5.1 * perc);
-//     }
-//     else {
-//         g = 255;
-//         r = Math.round(510 - 5.10 * perc);
-//     }
-//     var h = r * 0x10000 + g * 0x100 + b * 0x1;
-//     console.log('#' + ('000000' + h.toString(16)).slice(-6));
-// }
 
-// greenToRead(0);
+export function greenToRed(greenR, greenG, greenB) {
+    let XYZ = RGBtoXYZ(greenR,greenG,greenB)
+    let colX = XYZ[0];
+    let colY = XYZ[1];
+    let colZ = XYZ[2];  
+    let LAB = XYZtoLAB(colX, colY, colZ)
 
-// function componentToHex(c) {
-//     var hex = c.toString(16);
-//     return hex.length == 1 ? "0" + hex : hex;
-//   }
-  
-//   function rgbToHex(r, g, b) {
-//     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-//   }
-  
+    let greenL = LAB[0];
+    let greenA = LAB[1];
+    let greenB2 = LAB[2];
 
-// function greenToRed(greenR, greenG, greenB) {
-//     var redR, redG, redB = 0;
-//     redR = greenG;
-//     redG = greenB;
-//     redB = greenR;
-    
-//     var answer = rgbToHex(redR, redG, redB);
-//     console.log(answer);
-// }
+    let redL = greenL;
+    let redA = (greenA) * (-1);
+    let redB = greenB2;
 
-// greenToRed(56, 93, 56); 
+    let redXYZ = LABtoXYZ(redL, redA, redB)
+    console.log(redXYZ)
+    let redX = redXYZ[0];
+    let redY = redXYZ[1];
+    let redZ = redXYZ[2];
 
-// const getGreenToRed = (percent) => {
-//     const r = 255 * percent/100;
-//     const g = 255 - (255 * percent/100);
-//     return 'rgb('+r+','+g+',0)';
-// }
+    let redRGB = XYZtoRGB(redX, redY, redZ)
 
-// user colour
-var Red   = 56;
-var Green = 79;
-var Blue  = 132;
-
-// user colour converted to XYZ space
-let XYZ = RGBtoXYZ(Red,Green,Blue)
-var colX = XYZ[0];
-var colY = XYZ[1];
-var colZ = XYZ[2];
-
-// alert(XYZ)
-
-var LAB = XYZtoLAB(colX, colY, colZ)
-
-console.log(LAB)
-console.log(LAB[0])
-console.log(LAB[1])
-console.log(LAB[2])
-
-var greenL = LAB[0];
-var greenA = LAB[1];
-var greenB = LAB[2];
-
-var redL = greenL;
-var redA = (greenA) * (-1);
-var redB = greenB
-
-console.log(redA)
+    console.log(redRGB);
+}
 
 function RGBtoXYZ(R, G, B)
 {
@@ -104,13 +58,13 @@ function RGBtoXYZ(R, G, B)
 
 function XYZtoLAB(x, y, z)
 {
-    var ref_X =  95.047;
-    var ref_Y = 100.000;
-    var ref_Z = 108.883;
+    let ref_X =  95.047;
+    let ref_Y = 100.000;
+    let ref_Z = 108.883;
 
-    var var_X = x / ref_X          //ref_X =  95.047   Observer= 2°, Illuminant= D65
-    var var_Y = y / ref_Y          //ref_Y = 100.000
-    var var_Z = z / ref_Z          //ref_Z = 108.883
+    let var_X = x / ref_X          //ref_X =  95.047   Observer= 2°, Illuminant= D65
+    let var_Y = y / ref_Y          //ref_Y = 100.000
+    let var_Z = z / ref_Z          //ref_Z = 108.883
 
     if ( var_X > 0.008856 ) var_X = Math.pow( var_X, 1/3 )
     else                    var_X = ( 7.787 * var_X ) + ( 16 / 116 )
@@ -119,19 +73,24 @@ function XYZtoLAB(x, y, z)
     if ( var_Z > 0.008856 ) var_Z = Math.pow (var_Z, 1/3 )
     else                    var_Z = ( 7.787 * var_Z ) + ( 16 / 116 )
 
-    var CIE_L = ( 116 * var_Y ) - 16
-    var CIE_a = 500 * ( var_X - var_Y )
-    var CIE_b = 200 * ( var_Y - var_Z )
+    let CIE_L = ( 116 * var_Y ) - 16
+    let CIE_a = 500 * ( var_X - var_Y )
+    let CIE_b = 200 * ( var_Y - var_Z )
 
 return [CIE_L, CIE_a, CIE_b]
 }
 
-function LABtoXYZ(x1, y1, z1)
-{
-    var XYZValue = Color.labToXyz([x1,y1,z1]);
+function LABtoXYZ(l, a, b){
+    let answer = Color.labToXyz([l, a, b]);
+    return answer
 }
 
-console.log(LABtoXYZ(24.294,19.570,0.211));
+function XYZtoRGB(x, y, z){
+    let answer2 = Color.xyzToRgb([x, y, z]);
+    return answer2
+}
+
+
 
 
 
