@@ -3,14 +3,15 @@
     "version": "1.0",
     "description": "Build an Extension!",
     "background": {
-      "scripts": ["scripts/background.js", "scripts/converter.js", "scripts/main.js", "scripts/content.js", "color.js"],
+      "scripts": ["scripts/main.js"],
       "persistent": true
     },
     "content_scripts": [{
         "matches": ["*://*/*"],
-        "js": ["scripts/content.js"]
+        "js": ["scripts/content.js", "scripts/main.js"]
     }],
-    "permissions": ["storage"],  
+    "permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
+    "host_permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
     "browser_action": {   
         "default_popup" : "basic.html"
     },    
