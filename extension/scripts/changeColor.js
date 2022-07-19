@@ -2659,22 +2659,34 @@ class Color {
   }
 
 function updatedColor(color){
-    let newColor = '';
+    let updatedColor = '';
     //get the color name of the hex passed in 
     let colorBreakDown = ntc.name(color);
     let shadeColor = colorBreakDown[3];
+    console.log(shadeColor)
     //check if color is green
-    if(shadeColor === 'Green') {
+    if(shadeColor == 'Green') {
         let rgbValueGreen = HEXtoRGB(color)
         let rValueGreen = rgbValueGreen[0];
         let gValueGreen = rgbValueGreen[1];
         let bValueGreen = rgbValueGreen[2];
-        newColor = greenToRed(rValueGreen, gValueGreen, bValueGreen);
+        updatedColor = greenToRed(rValueGreen, gValueGreen, bValueGreen);
+    } else if (color == '#E3FCF7') {
+        updatedColor = '#F7E2E2'
+    } else if (color == '016BF8') {
+        updatedColor = '#DB3030' 
+    } else if (color == '1254B7') {
+        updatedColor = '#970606'
+    } else if (color == 'C3E7FE') {
+        updatedColor = '#FFE1E9'
+    } else if (color == 'E1F7FF') {
+        updatedColor = '#FEC3C3'
     } else {
-        return color;
+        updatedColor = color;
     }
-    return newColor;
+    return updatedColor;
 }
+console.log(updatedColor('#E3FCF7'));
 
 function greenToRed(greenR, greenG, greenB) {
     let XYZ = RGBtoXYZ(greenR,greenG,greenB)
@@ -2776,58 +2788,3 @@ function HEXtoRGB(hexIn){
 }
 
 
-const allElements = document.getElementsByTagName('*');
-const set = new Set();
-
-// ✅ Loop through all elements (including html, head, meta, scripts)
-for (const element of allElements) {
-    for (const c of element.classList.entries()) {
-        set.add(c[1]);
-    }
-}
-
-const rgba2hex = (rgba) => `#${rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1).map((n, i) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', '')).join('')}`
-
-for (const className of set) {
-    for (element of document.getElementsByClassName(className)) {
-        // element.style.backgroundColor = "white";
-        // console.log(element); 
-        // console.log(getComputedStyle(element, null).getPropertyValue("background-color"));  
-        // console.log(getComputedStyle(element, null).getPropertyValue("color"));  
-        // const one = (getComputedStyle(element, 'hover').getPropertyValue("box-shadow"));  
-        // const one = (getComputedStyle(element, null).getPropertyValue("color")); 
-        // const oneHexVersion = rgba2hex(one).substring(0, 7)
-        // element.style.color = updatedColor(oneHexVersion);
-        
-        const one = (getComputedStyle(element, null).getPropertyValue("color")); 
-        if (one != "rgba(0, 0, 0, 0)") {
-            const oneHexVersion = rgba2hex(one).substring(0, 7);
-            element.style.color = updatedColor(oneHexVersion);
-        }
-
-        const two = (getComputedStyle(element, null).getPropertyValue("background-color")); 
-        if (two != "rgba(0, 0, 0, 0)") {
-            const twoHexVersion = rgba2hex(two).substring(0, 7);
-            element.style.backgroundColor = updatedColor(twoHexVersion);
-        }
-
-        if (element.tagName === "IMG") {
-            element.style.filter = "hue-rotate(200deg)";
-        } else {
-            const three = (getComputedStyle(element, null).getPropertyValue("border-left-color")); 
-            console.log(three);
-            if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
-                const threeHexVersion = rgba2hex(three).substring(0, 7);
-                // element.style.borderTopColor = updatedColor(threeHexVersion);
-                console.log('changing');
-                element.style.borderLeftColor = updatedColor(threeHexVersion);
-                element.style.borderRightColor = updatedColor(threeHexVersion);
-                element.style.borderTopColor = updatedColor(threeHexVersion);
-                element.style.borderBottomColor = updatedColor(threeHexVersion);
-                element.style.borderColor = updatedColor(threeHexVersion);
-            }
-        }
-        // console.log("break")
-        // console.log(rgba2hex(color).substring(0, 7));
-    }
-}
