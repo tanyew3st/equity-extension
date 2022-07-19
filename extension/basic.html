@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <!-- <script type="module" src="scripts/sample.js"></script> -->
-  <script type="module" src="scripts/main.js"></script>
-  <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-      }
-    </style>
-  </head>
-  <body>
-    <button id="changeColor">Click me!</button>
-  </body>
+<!-- <script type="module" src="scripts/sample.js"></script> -->
+<script type="module" src="scripts/main.js"></script>
+
+<head>
+  <style>
+    button {
+      height: 30px;
+      width: 30px;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+    <label class="form-check-label" for="inlineRadio1">Hourly</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+    <label class="form-check-label" for="inlineRadio2">Daily</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+    <label class="form-check-label" for="inlineRadio3">Weekly</label>
+  </div>
+  <div>
+    <form class="multi-range-field my-5 pb-5">
+      <input id="multi17" class="multi-range" type="range" />
+    </form>
+  </div>
+  <button id="changeColor">Click me!</button>
+</body>
+
 </html>
