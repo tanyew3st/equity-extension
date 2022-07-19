@@ -3,17 +3,17 @@
     "version": "1.0",
     "description": "Build an Extension!",
     "background": {
-      "scripts": ["scripts/main.js"],
-      "persistent": true
-    },
+        "service_worker": "scripts/background.js",
+        "type": "module"
+      },
     "content_scripts": [{
         "matches": ["*://*/*"],
         "js": ["scripts/content.js", "scripts/main.js"]
     }],
     "permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
     "host_permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
-    "browser_action": {   
+    "action": {   
         "default_popup" : "basic.html"
     },    
-    "manifest_version": 2
+    "manifest_version": 3
 }

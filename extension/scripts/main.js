@@ -12,20 +12,13 @@ const fetchClasses = () => {
         var tab = tabs[0];
         console.log(tab);
 
-        function modifyDOM() {
-            //You can play with your DOM here or check URL against your regex
-            console.log('Tab script:');
-            console.log(document.body);
-            return document.body.innerHTML;
-        }
-
         // tab_title = tab.title;
-        console.log(chrome);
-        chrome.scripting.executeScript(tab.id, {
-          code: '(' + modifyDOM + ')'
-        }, (result) => {
-            console.log(result);
-        });
+        chrome.scripting.executeScript(
+            {
+              target: {tabId: tabId},
+              files: ['scripts/getAllElements.js'],
+            },
+        (response) => { console.log(response); });        
     });
 
     let allElements;
