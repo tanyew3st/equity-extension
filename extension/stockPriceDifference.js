@@ -15,7 +15,7 @@ function getLocalStorageData(){
 
 
     const userPrefs = window.localStorage.getItem('preferences');
-    timeInterval = userPrefs['timeInterval']; 
+    timeInterval = userPrefs['timePeriod']; 
     higherThreshold = userPrefs['higherThreshold']; 
     lowerThreshold = userPrefs['lowerThreshold']; 
 
