@@ -133,7 +133,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         console.log(color);
 
 
-        return color;
+        return [color, currPrice];
 
 
 

@@ -23,29 +23,31 @@
 <body>
   <form id="preferences-form">
     <!-- Radio -->
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-      <label class="form-check-label" for="flexRadioDefault1">
-        Hourly
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-      <label class="form-check-label" for="flexRadioDefault2">
-        Daily
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-      <label class="form-check-label" for="flexRadioDefault3">
-        Weekly
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
-      <label class="form-check-label" for="flexRadioDefault4">
-        Monthly
-      </label>
+    <div class="row">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          1h
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          1d
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+        <label class="form-check-label" for="flexRadioDefault3">
+          1w
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+        <label class="form-check-label" for="flexRadioDefault4">
+          1m
+        </label>
+      </div>
     </div>
     <!-- Slider -->
     <input id="lower-range" name="lower-range" form-range-track-bg="red" value="-5" min="-20" max="20" class="multi-range" type="range" />
@@ -53,7 +55,7 @@
     <input id="upper-range" value="5" min="-20" max="20" class="multi-range" type="range" />
     <label id="upper-val" class="form-check-label" for="upper-range"> 5 </label>
     <!-- Button -->
-    <input type="submit" value="Submit" />
+    <input class="btn btn-primary" type="submit" value="Submit" />
     <script src="scripts/submitHandler.js"></script>
   </form>
 </body>
