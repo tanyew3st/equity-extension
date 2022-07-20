@@ -24,7 +24,7 @@ document.getElementById("preferences-form").addEventListener('submit', function 
         "lowerThreshold" : lowerBound,
         "higherThreshold" : upperBound,
     }
-    debugger;
+
    // window.localStorage.setItem("preferences", obj);
     chrome.storage.sync.set({"preferences":obj});
     console.log(window.localStorage);
