@@ -1,13 +1,13 @@
 import { convertMain } from './converter.js'
 
-function display_h1 (results){
+function display_h1(results) {
     console.log(results);
 }
 
 const fetchClasses = () => {
     let tabId;
 
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         tabId = tabs[0].id;
         var tab = tabs[0];
         console.log(tab);
@@ -15,10 +15,10 @@ const fetchClasses = () => {
         // tab_title = tab.title;
         chrome.scripting.executeScript(
             {
-              target: {tabId: tabId},
-              files: ['scripts/getAllElements.js'],
+                target: { tabId: tabId },
+                files: ['scripts/getAllElements.js'],
             },
-        (response) => { console.log(response); });        
+            (response) => { console.log(response); });
     });
 
     let allElements;
@@ -47,11 +47,10 @@ const fetchClasses = () => {
         // element.style.backgroundColor = "white";
         console.log(element);
     }
-
 }
+
 window.onload = (event) => {
     convertMain();
-    fetchClasses();
-    slider();
+    // fetchClasses();
     console.log(event);
 }

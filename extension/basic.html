@@ -2,40 +2,60 @@
 <html>
 <!-- <script type="module" src="scripts/sample.js"></script> -->
 <script type="module" src="scripts/main.js"></script>
-<script type="module" src="scripts/js/vendor/foundation.min.js"></script>
+
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <style>
     button {
       height: 30px;
       width: 30px;
       outline: none;
     }
+
+    body {
+      height: 200px;
+      width: 300px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-    <label class="form-check-label" for="inlineRadio1">Hourly</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">Daily</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-    <label class="form-check-label" for="inlineRadio3">Weekly</label>
-  </div>
-  <div>
-    <form class="multi-range-field my-5 pb-5">
-      <input id="slider1" class="multi-range" type="range" />
-    </form>
-    <form class="multi-range-field my-5 pb-5">
-      <input id="slider2" class="multi-range" type="range" />
-    </form>
-  </div>
-  <button id="changeColor">Click me!</button>
+  <form id="preferences-form">
+    <!-- Radio -->
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Hourly
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Daily
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+      <label class="form-check-label" for="flexRadioDefault3">
+        Weekly
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+      <label class="form-check-label" for="flexRadioDefault4">
+        Monthly
+      </label>
+    </div>
+    <!-- Slider -->
+    <input id="lower-range" name="lower-range" form-range-track-bg="red" value="-5" min="-20" max="20" class="multi-range" type="range" />
+    <label id="lower-val" class="form-check-label" for="lower-range">Lower bound</label>
+    <input id="upper-range" value="5"  min="-20" max="20" class="multi-range" type="range" />
+    <label id="upper-val" class="form-check-label" for="upper-range">Upper bound</label>
+    <!-- Button -->
+    <input type="submit" value="Submit" />
+    <script src="scripts/submitHandler.js"></script>
+  </form>
 </body>
 
 </html>
