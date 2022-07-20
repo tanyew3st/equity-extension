@@ -2769,7 +2769,6 @@ const updateColors = (color) => {
 
     // ✅ Loop through all elements (including html, head, meta, scripts)
     for (const element of allElements) {
-        console.log(element);
         for (const c of element.classList.entries()) {
             set.add(c[1]);
         }
@@ -2780,7 +2779,6 @@ const updateColors = (color) => {
     }
 
     for (const className of set) {
-        console.log(className);
         for (element of document.getElementsByClassName(className)) {
             element.style.color = "";
             element.style.backgroundColor = "";
@@ -2806,7 +2804,6 @@ const updateColors = (color) => {
                 if (color === 0) {                
                     element.style.color = updatedColor(oneHexVersion);
                 } else if (color === 1) {
-                    console.log(grayscale(oneHexVersion));
                     element.style.color = grayscale(oneHexVersion);
                 } else {
                 }
@@ -2834,17 +2831,26 @@ const updateColors = (color) => {
                 }
             } else {
                 const three = (getComputedStyle(element, null).getPropertyValue("border-left-color")); 
-                if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
-                    const threeHexVersion = rgba2hex(three).substring(0, 7);
-                    element.style.borderLeftColor = updatedColor(threeHexVersion);
-                    element.style.borderRightColor = updatedColor(threeHexVersion);
-                    element.style.borderTopColor = updatedColor(threeHexVersion);
-                    element.style.borderBottomColor = updatedColor(threeHexVersion);
-                    element.style.borderColor = updatedColor(threeHexVersion);
+                if (color === 0) {
+                    if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
+                        const threeHexVersion = rgba2hex(three).substring(0, 7);
+                        element.style.borderLeftColor = updatedColor(threeHexVersion);
+                        element.style.borderRightColor = updatedColor(threeHexVersion);
+                        element.style.borderTopColor = updatedColor(threeHexVersion);
+                        element.style.borderBottomColor = updatedColor(threeHexVersion);
+                        element.style.borderColor = updatedColor(threeHexVersion);
+                    }
+                } else if (color === 1) {
+                    if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
+                        const threeHexVersion = rgba2hex(three).substring(0, 7);
+                        element.style.borderLeftColor = grayscale(threeHexVersion);
+                        element.style.borderRightColor = grayscale(threeHexVersion);
+                        element.style.borderTopColor = grayscale(threeHexVersion);
+                        element.style.borderBottomColor = grayscale(threeHexVersion);
+                        element.style.borderColor = grayscale(threeHexVersion);
+                    }
                 }
             }
-            // console.log("break")
-            // console.log(rgba2hex(color).substring(0, 7));
         }
     }
 
@@ -2854,9 +2860,8 @@ const updateColors = (color) => {
 const color = 1;
 
 let updated = false;
-let count = 0; 
+let count = 1; 
 const intee = setInterval(() => {
-    console.log("updating..");
     updated = updateColors(color);
     count++; 
     if (count > 5) {

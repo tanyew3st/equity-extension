@@ -24,7 +24,8 @@ document.getElementById("preferences-form").addEventListener('submit', function 
         "lowerThreshold" : lowerBound,
         "higherThreshold" : upperBound,
     }
-    debugger;
+    // debugger;
+    console.log("setting item");
     window.localStorage.setItem("preferences", obj);
     console.log(window.localStorage);
 });
