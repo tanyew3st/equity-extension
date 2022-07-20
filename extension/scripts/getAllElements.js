@@ -2659,6 +2659,8 @@ class Color {
   }
 
 function updatedColor(color){
+    // console.log(color);
+    color = color.toUpperCase();
     let newColor = '';
     //get the color name of the hex passed in 
     let colorBreakDown = ntc.name(color);
@@ -2670,8 +2672,18 @@ function updatedColor(color){
         let gValueGreen = rgbValueGreen[1];
         let bValueGreen = rgbValueGreen[2];
         newColor = greenToRed(rValueGreen, gValueGreen, bValueGreen);
+    } else if (color === '#E3FCF7') {
+        newColor = '#F7E2E2'
+    } else if (color === '#016BF8' || color === '#006CFA') {
+        newColor = '#DB3030' 
+    } else if (color === '#1254B7') {
+        newColor = '#970606'
+    } else if (color === '#C3E7FE') {
+        newColor = '#FFE1E9'
+    } else if (color === '#E1F7FF') {
+        newColor = '#FEC3C3'
     } else {
-        return color;
+        newColor = color;
     }
     return newColor;
 }
@@ -2812,14 +2824,13 @@ for (const className of set) {
         }
 
         if (element.tagName === "IMG") {
+            console.log(element.src);
             element.style.filter = "hue-rotate(200deg)";
         } else {
             const three = (getComputedStyle(element, null).getPropertyValue("border-left-color")); 
-            console.log(three);
             if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
                 const threeHexVersion = rgba2hex(three).substring(0, 7);
                 // element.style.borderTopColor = updatedColor(threeHexVersion);
-                console.log('changing');
                 element.style.borderLeftColor = updatedColor(threeHexVersion);
                 element.style.borderRightColor = updatedColor(threeHexVersion);
                 element.style.borderTopColor = updatedColor(threeHexVersion);
