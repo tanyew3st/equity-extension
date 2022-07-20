@@ -28,3 +28,13 @@ document.getElementById("preferences-form").addEventListener('submit', function 
     window.localStorage.setItem("preferences", obj);
     console.log(window.localStorage);
 });
+
+document.getElementById("lower-range").addEventListener("input", function () {
+    console.log("called");
+    document.getElementById("lower-val").innerHTML= document.getElementById("lower-range").value;
+});
+
+document.getElementById("upper-range").addEventListener("input", function () {
+    console.log("called");
+    document.getElementById("upper-val").innerHTML= document.getElementById("upper-range").value;
+});
