@@ -6,13 +6,18 @@ const finnhubClient = new finnhub.DefaultApi();
 
 
 
+
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
 
+
+
+
+
     const userPrefs = window.localStorage.getItem('preferences');
-    timeInterval = userPrefs.timeInterval; 
-    higherThreshold = userPrefs.higherThreshold; 
-    lowerThreshold = userPrefs.lowerThreshold; 
+    timeInterval = userPrefs['timeInterval']; 
+    higherThreshold = userPrefs['higherThreshold']; 
+    lowerThreshold = userPrefs['lowerThreshold']; 
 
     return [timeInterval, higherThreshold, lowerThreshold]; 
 
@@ -141,6 +146,5 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 
 }
 
-LocalStorage.setItem("preferences", Obj); 
 userPreferences = getLocalStorageData();
-getStockPriceDifference(userPreferences[0], userPreferences[1], userPreferences[2]);
+getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);
