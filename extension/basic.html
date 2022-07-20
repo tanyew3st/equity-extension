@@ -22,41 +22,44 @@
 
 <body>
   <form id="preferences-form">
+    <p>Select your time period and upper/lower threshold preferences for MDB below!</p>
     <!-- Radio -->
-    <div class="row">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          1h
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          1d
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-        <label class="form-check-label" for="flexRadioDefault3">
-          1w
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
-        <label class="form-check-label" for="flexRadioDefault4">
-          1m
-        </label>
-      </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        1h
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+      <label class="form-check-label" for="flexRadioDefault2">
+        1d
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+      <label class="form-check-label" for="flexRadioDefault3">
+        1w
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+      <label class="form-check-label" for="flexRadioDefault4">
+        1m
+      </label>
     </div>
     <!-- Slider -->
-    <input id="lower-range" name="lower-range" form-range-track-bg="red" value="-5" min="-20" max="20" class="multi-range" type="range" />
-    <label id="lower-val" for="lower-range">Lower bound</label>
-    <input id="upper-range" value="5"  min="-20" max="20" class="multi-range" type="range" />
-    <label id="upper-val" class="form-check-label" for="upper-range">Upper bound</label>
+    <input id="lower-range" name="lower-range" form-range-track-bg="red" value="-5" min="-10" max="0"
+      class="multi-range" type="range" style="width:100%" />
+    <label id="lower-val" class="form-check-label" for="lower-range"> -5 </label>
+    <br>
+    <input id="upper-range" value="5" min="0" max="10" class="multi-range" type="range" style="width:100%"/>
+    <label id="upper-val" class="form-check-label" for="upper-range"> 5 </label>
     <!-- Button -->
+    <br>
     <input class="btn btn-primary" type="submit" value="Submit" />
     <script src="scripts/submitHandler.js"></script>
   </form>
 </body>
+
 </html>
