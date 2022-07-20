@@ -1,6 +1,7 @@
 
 
-const finnhub = require('finnhub'); //import finhub from 'finhub'; 
+//const finnhub = require('finnhub'); 
+import finhub from 'finhub'; 
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 api_key.apiKey = "cbarv4aad3i91bfqbbug"
 const finnhubClient = new finnhub.DefaultApi();
