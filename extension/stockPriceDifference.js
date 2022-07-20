@@ -1,5 +1,5 @@
 
-const finnhub = require('finnhub');
+const finnhub = require('finnhub'); //import finhub from 'finhub'; 
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 api_key.apiKey = "cbarv4aad3i91bfqbbug"
 const finnhubClient = new finnhub.DefaultApi();
@@ -10,16 +10,34 @@ const finnhubClient = new finnhub.DefaultApi();
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
 
+    const obj = {
+        "timePeriod" : timePeriod,
+        "lowerThreshold" : lowerBound,
+        "higherThreshold" : upperBound,
+    }
+    debugger;
+    window.localStorage.setItem("preferences", obj);
+    console.log(window.localStorage);
 
-
-
-
+    try{
     const userPrefs = window.localStorage.getItem('preferences');
     timeInterval = userPrefs['timePeriod']; 
     higherThreshold = userPrefs['higherThreshold']; 
     lowerThreshold = userPrefs['lowerThreshold']; 
 
+    }
+    // if user preferences are not set
+    catch(error){
+        timeInterval = 'Hour';
+        higherThreshold = 1; 
+        lowerThreshold = -1; 
+    }
+
+
+
     return [timeInterval, higherThreshold, lowerThreshold]; 
+
+
 
 }
 
