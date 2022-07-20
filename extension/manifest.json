@@ -1,6 +1,6 @@
 {
     "name": "Stockify",
-    "version": "1.0",
+    "version": "2.0",
     "description": "Build an Extension!",
     "background": {
         "service_worker": "scripts/background.js",
@@ -10,8 +10,8 @@
         "matches": ["*://*/*"],
         "js": ["scripts/content.js", "scripts/main.js"]
     }],
-    "permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
-    "host_permissions": ["storage", "activeTab", "delcarativeContent", "tabs", "scripting", "<all_urls>"],  
+    "permissions": ["storage", "delcarativeContent", "tabs", "scripting"],  
+    "host_permissions": ["storage", "delcarativeContent", "tabs", "scripting"],  
     "action": {   
         "default_popup" : "basic.html"
     },    

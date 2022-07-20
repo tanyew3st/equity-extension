@@ -27,8 +27,8 @@ const canvas = document.getElementById("yeet");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const cx = ctx.canvas.width / 2;
-const cy = ctx.canvas.height / 2;
+let cx = ctx.canvas.width / 2;
+let cy = ctx.canvas.height / 2;
 
 let confetti = [];
 const confettiCount = 300;
@@ -133,9 +133,9 @@ changeColor.addEventListener('click', function () {
 });
 
 //----------Resize----------
-window.addEventListener('resize', function () {
-  resizeCanvas();
-});
+// window.addEventListener('resize', function () {
+//   resizeCanvas();
+// });
 
 //------------Click------------
 window.addEventListener('click', function () {

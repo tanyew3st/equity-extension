@@ -1,57 +1,71 @@
-// import { convertMain } from './converter.js'
+// // const convertMain = require('./converter.js')
 
-function display_h1 (results){
-    console.log(results);
-}
+// // (async () => {
+// //     const src = chrome.runtime.getURL("your/content_main.js");
+// //     const contentMain = await import(src);
+// //     contentMain.main();
+// //   })();
 
-const fetchClasses = () => {
-    let tabId;
+// function display_h1 (results){
+//     console.log(results);
+// }
 
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
-        tabId = tabs[0].id;
-        var tab = tabs[0];
-        console.log(tab);
+// const fetchClasses = () => {
 
-        // tab_title = tab.title;
-        chrome.scripting.executeScript(
-            {
-              target: {tabId: tabId},
-              files: ['scripts/getAllElements.js'],
-            },
-        (response) => { console.log(response); });        
-    });
+//     console.log("something");
+//     let tabId;
 
-    let allElements;
+//     chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+//         tabId = tabs[0].id;
+//         var tab = tabs[0];
+//         console.log(tab);
 
-    // chrome.tabs.executeScript(tabId, {
-    //     code: "document.getElementsByTagName('*')"
-    //   }, (response) => {
-    //     console.log(response);
-    //   });
+//         // tab_title = tab.title;
+//         chrome.scripting.executeScript(
+//             {
+//               target: {tabId: tabId},
+//               files: ['scripts/getAllElements.js'],
+//             },
+//         (response) => { console.log(response); });        
+//     });
 
-    // const allElements = document.getElementsByTagName('*');
-    console.log(allElements);
-    const set = new Set();
+//     let allElements;
 
-    // ✅ Loop through all elements (including html, head, meta, scripts)
-    for (const element of allElements) {
-        console.log(element);
-        for (const c of element.classList.entries()) {
-            set.add(c[1]);
-        }
-    }
+//     // chrome.tabs.executeScript(tabId, {
+//     //     code: "document.getElementsByTagName('*')"
+//     //   }, (response) => {
+//     //     console.log(response);
+//     //   });
 
-    for (const className of set) {
-        const element = document.getElementsByClassName(className)[0];
-        console.log(element.style.backgroundColor);
-        // element.style.backgroundColor = "white";
-        console.log(element);
-    }
+//     // const allElements = document.getElementsByTagName('*');
+//     console.log(allElements);
+//     const set = new Set();
 
-}
-window.onload = (event) => {
-    convertMain();
-    // fetchClasses();
-    // slider();
-    console.log(event);
-}
+//     // ✅ Loop through all elements (including html, head, meta, scripts)
+//     for (const element of allElements) {
+//         console.log(element);
+//         for (const c of element.classList.entries()) {
+//             set.add(c[1]);
+//         }
+//     }
+
+//     for (const className of set) {
+//         const element = document.getElementsByClassName(className)[0];
+//         console.log(element.style.backgroundColor);
+//         // element.style.backgroundColor = "white";
+//         console.log(element);
+//     }
+
+// }
+
+// window.onload = (event) => {
+//     console.log("sending message...");
+//     chrome.runtime.sendMessage({}, function(response) {
+//         console.log(response);
+//         //code to initialize my extension
+//     });    
+
+//     fetchClasses();
+//     // slider();
+//     console.log(event);
+// }
