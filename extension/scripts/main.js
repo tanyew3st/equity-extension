@@ -1,8 +1,10 @@
 
 
 //const finnhub = require('finnhub'); 
-import finhub from 'finhub'; 
-const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+//import finhub from 'finhub'; 
+//const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+
+
 api_key.apiKey = "cbarv4aad3i91bfqbbug"
 const finnhubClient = new finnhub.DefaultApi();
 
@@ -15,6 +17,7 @@ var lowerThreshold = -1;
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
 
+    /** 
     const obj = {
         "timePeriod" : 'Hour',
         "lowerThreshold" : 1,
@@ -26,6 +29,7 @@ function getLocalStorageData(){
 
 
     chrome.storage.sync.set({'preferences':obj});
+    **/
     try{
     //const userPrefs = window.localStorage.getItem('preferences');
     chrome.storage.sync.get("preferences",function(res){
@@ -70,14 +74,28 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
     var prevTime = 0;
     var prevPrice = 0;
 
+    //axios.get(url[, config])
+
     // gets current stock price and time in seconds
-    finnhubClient.stockCandles("MDB", "30", currentTime - threeDaysAgo, currentTime, (error, data, response) => {
+
+    fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=30&from=" + (currentTime - threeDaysAgo) +
+     "&to=" + currentTime + "&token=cbarv4aad3i91bfqbbug").then(data=>{
         var times = data['t'];
         currTime = times[times.length - 1];
         currPrice = data['c'][times.length - 1];
+        console.log(currTime);
+        console.log(currPrice);
 
-    });
 
+    })
+    //finnhubClient.stockCandles("MDB", "30", currentTime - threeDaysAgo, currentTime, (error, data, response) => {
+       //var times = data['t'];
+       // currTime = times[times.length - 1];
+       // currPrice = data['c'][times.length - 1];
+
+    //});
+
+    /** 
     setTimeout(() => {
 
 
@@ -175,9 +193,10 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 
 
 }
+**/
 
 userPreferences = getLocalStorageData();
-getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);
+getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);}
 
 
 // // const convertMain = require('./converter.js')
