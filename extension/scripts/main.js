@@ -5,8 +5,8 @@
 //const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 
 
-api_key.apiKey = "cbarv4aad3i91bfqbbug"
-const finnhubClient = new finnhub.DefaultApi();
+//api_key.apiKey = "cbarv4aad3i91bfqbbug"
+//const finnhubClient = new finnhub.DefaultApi();
 
 var timeInterval = 'Hour';
 var higherThreshold = 1; 
