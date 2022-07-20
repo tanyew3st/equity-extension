@@ -2753,58 +2753,113 @@ function HEXtoRGB(hexIn){
     return answer4
 }
 
-
-const allElements = document.getElementsByTagName('*');
-const set = new Set();
-
-// ✅ Loop through all elements (including html, head, meta, scripts)
-for (const element of allElements) {
-    for (const c of element.classList.entries()) {
-        set.add(c[1]);
-    }
+const grayscale = (color) => {
+    const [r, g, b] = HEXtoRGB(color);
+    const grayValue = Math.floor((r + g + b) / 3);
+    // const newVal = 255 - grayValue; 
+    const retstr = RGBtoHEX(grayValue, grayValue, grayValue);
+    return retstr
 }
 
 const rgba2hex = (rgba) => `#${rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1).map((n, i) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', '')).join('')}`
 
-for (const className of set) {
-    for (element of document.getElementsByClassName(className)) {
-        // element.style.backgroundColor = "white";
-        // console.log(element); 
-        // console.log(getComputedStyle(element, null).getPropertyValue("background-color"));  
-        // console.log(getComputedStyle(element, null).getPropertyValue("color"));  
-        // const one = (getComputedStyle(element, 'hover').getPropertyValue("box-shadow"));  
-        // const one = (getComputedStyle(element, null).getPropertyValue("color")); 
-        // const oneHexVersion = rgba2hex(one).substring(0, 7)
-        // element.style.color = updatedColor(oneHexVersion);
-        
-        const one = (getComputedStyle(element, null).getPropertyValue("color")); 
-        if (one != "rgba(0, 0, 0, 0)") {
-            const oneHexVersion = rgba2hex(one).substring(0, 7);
-            element.style.color = updatedColor(oneHexVersion);
-        }
+const updateColors = (color) => {
+    const allElements = document.getElementsByTagName('*');
+    const set = new Set();
 
-        const two = (getComputedStyle(element, null).getPropertyValue("background-color")); 
-        if (two != "rgba(0, 0, 0, 0)") {
-            const twoHexVersion = rgba2hex(two).substring(0, 7);
-            element.style.backgroundColor = updatedColor(twoHexVersion);
+    // ✅ Loop through all elements (including html, head, meta, scripts)
+    for (const element of allElements) {
+        console.log(element);
+        for (const c of element.classList.entries()) {
+            set.add(c[1]);
         }
-
-        if (element.tagName === "IMG") {
-            console.log(element.src);
-            element.style.filter = "hue-rotate(200deg)";
-        } else {
-            const three = (getComputedStyle(element, null).getPropertyValue("border-left-color")); 
-            if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
-                const threeHexVersion = rgba2hex(three).substring(0, 7);
-                // element.style.borderTopColor = updatedColor(threeHexVersion);
-                element.style.borderLeftColor = updatedColor(threeHexVersion);
-                element.style.borderRightColor = updatedColor(threeHexVersion);
-                element.style.borderTopColor = updatedColor(threeHexVersion);
-                element.style.borderBottomColor = updatedColor(threeHexVersion);
-                element.style.borderColor = updatedColor(threeHexVersion);
-            }
-        }
-        // console.log("break")
-        // console.log(rgba2hex(color).substring(0, 7));
     }
+
+    if (set.size < 10) {
+        return false;
+    }
+
+    for (const className of set) {
+        console.log(className);
+        for (element of document.getElementsByClassName(className)) {
+            element.style.color = "";
+            element.style.backgroundColor = "";
+            element.style.borderLeftColor = "";
+            element.style.borderRightColor = "";
+            element.style.borderTopColor = "";
+            element.style.borderBottomColor = "";
+            element.style.borderColor = "";
+            element.style.filter = "";
+
+            // element.style.backgroundColor = "white";
+            // console.log(element); 
+            // console.log(getComputedStyle(element, null).getPropertyValue("background-color"));  
+            // console.log(getComputedStyle(element, null).getPropertyValue("color"));  
+            // const one = (getComputedStyle(element, 'hover').getPropertyValue("box-shadow"));  
+            // const one = (getComputedStyle(element, null).getPropertyValue("color")); 
+            // const oneHexVersion = rgba2hex(one).substring(0, 7)
+            // element.style.color = updatedColor(oneHexVersion);
+            
+            const one = (getComputedStyle(element, null).getPropertyValue("color")); 
+            if (one != "rgba(0, 0, 0, 0)") {
+                const oneHexVersion = rgba2hex(one).substring(0, 7);
+                if (color === 0) {                
+                    element.style.color = updatedColor(oneHexVersion);
+                } else if (color === 1) {
+                    console.log(grayscale(oneHexVersion));
+                    element.style.color = grayscale(oneHexVersion);
+                } else {
+                }
+            }
+    
+            const two = (getComputedStyle(element, null).getPropertyValue("background-color")); 
+            if (two != "rgba(0, 0, 0, 0)") {
+                const twoHexVersion = rgba2hex(two).substring(0, 7);
+                if (color === 0) {                
+                    element.style.backgroundColor = updatedColor(twoHexVersion);
+                } else if (color === 1) {
+                    element.style.backgroundColor = grayscale(twoHexVersion);
+                } else {
+                    element.style.backgroundColor = "";
+                }            
+            }
+    
+            if (element.tagName === "IMG") {
+                if (color === 0) {
+                    element.style.filter = "hue-rotate(200deg)";
+                } else if (color === 1) {
+                    element.style.filter = "grayscale(1)";
+                } else {
+
+                }
+            } else {
+                const three = (getComputedStyle(element, null).getPropertyValue("border-left-color")); 
+                if (three !== null && three !== "" && three !== "rgba(0, 0, 0, 0)") {
+                    const threeHexVersion = rgba2hex(three).substring(0, 7);
+                    element.style.borderLeftColor = updatedColor(threeHexVersion);
+                    element.style.borderRightColor = updatedColor(threeHexVersion);
+                    element.style.borderTopColor = updatedColor(threeHexVersion);
+                    element.style.borderBottomColor = updatedColor(threeHexVersion);
+                    element.style.borderColor = updatedColor(threeHexVersion);
+                }
+            }
+            // console.log("break")
+            // console.log(rgba2hex(color).substring(0, 7));
+        }
+    }
+
+    return true;
 }
+
+const color = 1;
+
+let updated = false;
+let count = 0; 
+const intee = setInterval(() => {
+    console.log("updating..");
+    updated = updateColors(color);
+    count++; 
+    if (count > 5) {
+        clearInterval(intee);
+    }
+}, 1000)
