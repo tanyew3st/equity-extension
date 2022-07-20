@@ -1,10 +1,34 @@
+// When the button is clicked, inject setPageBackgroundColor into current page
+// throwConfetti.addEventListener("click", async () => {
+//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+//     chrome.scripting.executeScript({
+//         target: { tabId: tab.id },
+//         function: setPageBackgroundColor,
+//     });
+// });
+
+// The body of this function will be executed as a content script inside the
+// current page
+function playConfettiAnimation() {
+  // chrome.storage.sync.get("color", ({ color }) => {
+  //     document.body.style.backgroundColor = color;
+  // });
+  initConfetti();
+}
+
+
+
+
+
+
 //-----------Var Inits--------------
-canvas = document.getElementById("canvas");
-ctx = canvas.getContext("2d");
+const canvas = document.getElementById("yeet");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-cx = ctx.canvas.width / 2;
-cy = ctx.canvas.height / 2;
+const cx = ctx.canvas.width / 2;
+const cy = ctx.canvas.height / 2;
 
 let confetti = [];
 const confettiCount = 300;
@@ -23,16 +47,16 @@ const colors = [
 
 
 //-----------Functions--------------
-resizeCanvas = () => {
+const resizeCanvas = () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   cx = ctx.canvas.width / 2;
   cy = ctx.canvas.height / 2;
 };
 
-randomRange = (min, max) => Math.random() * (max - min) + min;
+const randomRange = (min, max) => Math.random() * (max - min) + min;
 
-initConfetti = () => {
+const initConfetti = () => {
   for (let i = 0; i < confettiCount; i++) {
     confetti.push({
       color: colors[Math.floor(randomRange(0, colors.length))],
@@ -58,7 +82,7 @@ initConfetti = () => {
 };
 
 //---------Render-----------
-render = () => {
+const render = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   confetti.forEach((confetto, index) => {
@@ -102,9 +126,11 @@ render = () => {
   window.requestAnimationFrame(render);
 };
 
-//---------Execution--------
-initConfetti();
-render();
+let changeColor = document.getElementById("changeColor");
+changeColor.addEventListener('click', function () {
+    initConfetti();
+    render();
+});
 
 //----------Resize----------
 window.addEventListener('resize', function () {
