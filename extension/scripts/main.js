@@ -7,6 +7,7 @@ var lowerThreshold = -1;
 
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
+        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Stock Price Loading...";
 
 
     try{
@@ -78,11 +79,8 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         return response.json();
      }).then((data) => {
 
-        console.log(data);
 
 
-
-        debugger;
         var times = data['t'];
         currTime = times[times.length - 1];
         currPrice = data['c'][times.length - 1];
@@ -118,7 +116,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 
                 chrome.storage.sync.set({"color":color});
                 chrome.storage.sync.set({"price":currPrice});
-
+                document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
         
         
                 return [color, currPrice];
@@ -350,7 +348,11 @@ if (timeInterval == 'Month') {
 
 //debugger; 
 //let userPreferences = 
+
 getLocalStorageData();
+setInterval(getLocalStorageData(), 100000);
+
+
 //getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);
 
 
