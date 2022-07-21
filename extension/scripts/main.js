@@ -7,7 +7,7 @@ var lowerThreshold = -1;
 
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
-        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Stock Price Loading...";
+     document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Stock Price Loading...";
 
 
     try{
@@ -113,9 +113,10 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         
                 console.log(color);
                 console.log(currPrice);
+                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
 
                 chrome.storage.sync.set({"color":color});
-                chrome.storage.sync.set({"price":currPrice});
+                chrome.storage.sync.set({"price":priceInfo});
                 document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
         
                 return [color, currPrice];
@@ -148,8 +149,9 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 
             console.log(currPrice);
     
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
             chrome.storage.sync.set({"color":color});
-            chrome.storage.sync.set({"price":currPrice});
+            chrome.storage.sync.set({"price":priceInfo});
             document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
 
             return [color, currPrice];
@@ -181,9 +183,10 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         console.log(color);
 
         console.log(currPrice);
+        var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
 
         chrome.storage.sync.set({"color":color});
-        chrome.storage.sync.set({"price":currPrice});
+        chrome.storage.sync.set({"price":priceInfo});
         document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
 
 
@@ -217,9 +220,10 @@ if (timeInterval == 'Month') {
 
 
         console.log(currPrice);
+        var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
 
         chrome.storage.sync.set({"color":color});
-        chrome.storage.sync.set({"price":currPrice});                
+        chrome.storage.sync.set({"price":priceInfo});                
         document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
 
         return [color, currPrice];
