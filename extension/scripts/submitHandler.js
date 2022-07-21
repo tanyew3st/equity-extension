@@ -20,26 +20,60 @@ document.getElementById("preferences-form").addEventListener('submit', function 
     }
 
     const obj = {
-        "timePeriod" : timePeriod,
-        "lowerThreshold" : lowerBound,
-        "higherThreshold" : upperBound,
+        "timePeriod": timePeriod,
+        "lowerThreshold": lowerBound,
+        "higherThreshold": upperBound,
     }
 
-   // window.localStorage.setItem("preferences", obj);
-    chrome.storage.sync.set({"preferences":obj});
+    chrome.storage.sync.set({ "preferences": obj });
     console.log(window.localStorage);
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.reload(tabs[0].id);
-      });
+    });
     window.close();
 });
 
 document.getElementById("lower-range").addEventListener("input", function () {
     console.log("called");
-    document.getElementById("lower-val").innerHTML= document.getElementById("lower-range").value + '%';
+    document.getElementById("lower-val").innerHTML = document.getElementById("lower-range").value + '%';
 });
 
 document.getElementById("upper-range").addEventListener("input", function () {
     console.log("called");
-    document.getElementById("upper-val").innerHTML= document.getElementById("upper-range").value + '%';
+    document.getElementById("upper-val").innerHTML = document.getElementById("upper-range").value + '%';
 });
+
+const setPreferences = () => {
+    let timeInterval;
+    let higherThreshold;
+    let lowerThreshold;
+    try {
+        chrome.storage.sync.get("preferences", function (res) {
+            debugger;
+            timeInterval = res['preferences']['timePeriod'];
+            higherThreshold = res['preferences']['higherThreshold'];
+            lowerThreshold = res['preferences']['lowerThreshold'];
+            document.getElementById("lower-range").value = parseInt(lowerThreshold * 100);
+            document.getElementById("lower-val").innerHTML = parseInt(lowerThreshold * 100) + '%';
+            document.getElementById("upper-range").value = parseInt(higherThreshold * 100);
+            document.getElementById("upper-val").innerHTML = parseInt(higherThreshold * 100) + '%';
+            document.getElementById(timeInterval + "Radio").setAttribute("checked", "");
+            
+        })
+    }
+    // if user preferences are not set
+    catch (error) {
+        debugger;
+        timeInterval = 'Hour';
+        higherThreshold = 5;
+        lowerThreshold = -5;
+        document.getElementById("lower-range").value = lowerThreshold;
+        document.getElementById("lower-val").innerHTML = lowerThreshold + '%';
+        document.getElementById("upper-range").value = higherThreshold;
+        document.getElementById("upper-val").innerHTML = higherThreshold + '%';
+        document.getElementById(timeInterval + "Radio").setAttribute("checked", "");
+
+    }
+}
+
+setPreferences();
