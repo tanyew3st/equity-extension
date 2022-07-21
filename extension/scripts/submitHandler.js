@@ -28,6 +28,9 @@ document.getElementById("preferences-form").addEventListener('submit', function 
    // window.localStorage.setItem("preferences", obj);
     chrome.storage.sync.set({"preferences":obj});
     console.log(window.localStorage);
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.reload(tabs[0].id);
+      });
     window.close();
 });
 
