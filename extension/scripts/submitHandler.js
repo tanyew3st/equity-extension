@@ -5,8 +5,8 @@ document.getElementById("preferences-form").addEventListener('submit', function 
     const day = form['1'].checked;
     const week = form['2'].checked;
     const month = form['3'].checked;
-    const lowerBound = form['4'].value;
-    const upperBound = form['5'].value;
+    const lowerBound = parseFloat(form['4'].value) / 100;
+    const upperBound = parseFloat(form['5'].value) / 100;
 
     let timePeriod = null;
     if (hour) {
@@ -25,7 +25,11 @@ document.getElementById("preferences-form").addEventListener('submit', function 
         "higherThreshold" : upperBound,
     }
     debugger;
-    window.localStorage.setItem("preferences", obj);
+    chrome.storage.sync.set({"key":"value"});
+    chrome.storage.sync.get("key",function(res) {
+        debugger;
+        console.log(res[key])
+        });
     console.log(window.localStorage);
 });
 
