@@ -8,6 +8,10 @@
 //api_key.apiKey = "cbarv4aad3i91bfqbbug"
 //const finnhubClient = new finnhub.DefaultApi();
 
+
+console.log(
+    "HI WORLD"
+);
 var timeInterval = 'Hour';
 var higherThreshold = 1; 
 var lowerThreshold = -1; 
@@ -16,6 +20,9 @@ var lowerThreshold = -1;
 
 // Gets User Preferences from Local Storage
 function getLocalStorageData(){
+
+
+    
 
     /** 
     const obj = {
@@ -30,14 +37,29 @@ function getLocalStorageData(){
 
     chrome.storage.sync.set({'preferences':obj});
     **/
+
     try{
     //const userPrefs = window.localStorage.getItem('preferences');
     chrome.storage.sync.get("preferences",function(res){
-        timeInterval = res['timePeriod']; 
-        higherThreshold = res['higherThreshold']; 
-        lowerThreshold = res['lowerThreshold']; 
+        timeInterval = res['preferences']['timePeriod']; 
+        higherThreshold = res['preferences']['higherThreshold']; 
+        lowerThreshold = res['preferences']['lowerThreshold']; 
+        
+       console.log(timeInterval);
+       console.log(higherThreshold);
+       console.log(lowerThreshold);
 
-    }).then((timeInterval, higherThreshold, lowerThreshold ) => {return [timeInterval, higherThreshold, lowerThreshold]; });
+    
+        console.log("oooh it worked!");
+
+        return getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold);
+
+
+       // return [timeInterval, higherThreshold, lowerThreshold]; 
+    })
+    //.error((error) => {
+
+   //});
 
 
     }
@@ -46,6 +68,7 @@ function getLocalStorageData(){
         timeInterval = 'Hour';
         higherThreshold = 1; 
         lowerThreshold = -1; 
+        console.log("error");
         return [timeInterval, higherThreshold, lowerThreshold]; 
     }
 
@@ -57,10 +80,21 @@ function getLocalStorageData(){
 
 }
 
+function streamToString (stream) {
+    const chunks = [];
+    return new Promise((resolve, reject) => {
+      stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+      stream.on('error', (err) => reject(err));
+      stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    })
+  }
 
 // Returns Stock status based on user preferences for stock Percentage threshold and time interval
 function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) {
 
+    console.log(
+        "THIS WORKS1"
+    );
 
     var currentTime = Math.round((new Date()).getTime() / 1000); // in seconds
     const threeDaysAgo = 259200;
@@ -74,20 +108,177 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
     var prevTime = 0;
     var prevPrice = 0;
 
-    //axios.get(url[, config])
 
     // gets current stock price and time in seconds
 
     fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=30&from=" + (currentTime - threeDaysAgo) +
-     "&to=" + currentTime + "&token=cbarv4aad3i91bfqbbug").then(data=>{
+     "&to=" + currentTime + "&token=cbarv4aad3i91bfqbbug").then((response) =>{
+        return response.json();
+     }).then((data) => {
+
+        console.log(data);
+
+
+
+        debugger;
         var times = data['t'];
         currTime = times[times.length - 1];
         currPrice = data['c'][times.length - 1];
         console.log(currTime);
         console.log(currPrice);
 
+         // gets stock price and time from 1 hour ago
+         if (timeInterval == 'Hour') {
+            fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo) +
+     "&to=" + (currentTime - 3600) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
+                var t = data['t'];
+                prevTime = t[t.length - 1];
+                prevPrice = data['c'][t.length - 1];
+                console.log(prevTime);
+                console.log(prevPrice);
+                var priceDifference = currPrice - prevPrice;
+                var priceDiffPercentage = priceDifference / prevPrice;
+                var color = '';
+        
+                // returns different labels based on user specificed threshold 
+                if (priceDiffPercentage > higherThreshold) {
+                    color = 2;
+                }
+                else if (priceDiffPercentage < lowerThreshold) {
+                    color = 0;
+                }
+                else {
+                    color = 1;
+                }
+        
+                console.log(color);
+                console.log(currPrice);
 
-    })
+                chrome.storage.sync.set({"color":color});
+                chrome.storage.sync.set({"price":currPrice});
+
+        
+        
+                return [color, currPrice];
+     }); }
+
+     if (timeInterval == 'Day') {
+        fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneDayAgo) +
+ "&to=" + (currentTime - oneDayAgo) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
+            var t = data['t'];
+            prevTime = t[t.length - 1];
+            prevPrice = data['c'][t.length - 1];
+            console.log(prevTime);
+            console.log(prevPrice);
+            var priceDifference = currPrice - prevPrice;
+            var priceDiffPercentage = priceDifference / prevPrice;
+            var color = '';
+    
+            // returns different labels based on user specificed threshold 
+            if (priceDiffPercentage > higherThreshold) {
+                color = 2;
+            }
+            else if (priceDiffPercentage < lowerThreshold) {
+                color = 0;
+            }
+            else {
+                color = 1;
+            }
+    
+            console.log(color);
+
+            console.log(currPrice);
+    
+            chrome.storage.sync.set({"color":color});
+            chrome.storage.sync.set({"price":currPrice});
+    
+            return [color, currPrice];
+ }); }
+
+ if (timeInterval == 'Week') {
+    fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneWeekAgo) +
+"&to=" + (currentTime - oneWeekAgo) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
+        var t = data['t'];
+        prevTime = t[t.length - 1];
+        prevPrice = data['c'][t.length - 1];
+        console.log(prevTime);
+        console.log(prevPrice);
+        var priceDifference = currPrice - prevPrice;
+        var priceDiffPercentage = priceDifference / prevPrice;
+        var color = '';
+
+        // returns different labels based on user specificed threshold 
+        if (priceDiffPercentage > higherThreshold) {
+            color = 2;
+        }
+        else if (priceDiffPercentage < lowerThreshold) {
+            color = 0;
+        }
+        else {
+            color = 1;
+        }
+
+        console.log(color);
+
+        console.log(currPrice);
+
+        chrome.storage.sync.set({"color":color});
+        chrome.storage.sync.set({"price":currPrice});
+
+
+        return [color, currPrice];
+}); }
+
+if (timeInterval == 'Month') {
+    fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneMonthAgo) +
+"&to=" + (currentTime - oneMonthAgo) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
+        var t = data['t'];
+        prevTime = t[t.length - 1];
+        prevPrice = data['c'][t.length - 1];
+        console.log(prevTime);
+        console.log(prevPrice);
+        var priceDifference = currPrice - prevPrice;
+        var priceDiffPercentage = priceDifference / prevPrice;
+        var color = '';
+
+        // returns different labels based on user specificed threshold 
+        if (priceDiffPercentage > higherThreshold) {
+            color = 2;
+        }
+        else if (priceDiffPercentage < lowerThreshold) {
+            color = 0;
+        }
+        else {
+            color = 1;
+        }
+
+        console.log(color);
+
+
+        console.log(currPrice);
+
+        chrome.storage.sync.set({"color":color});
+        chrome.storage.sync.set({"price":currPrice});
+        return [color, currPrice];
+       
+}); }
+               
+
+            })};
+
+
+
+
+
+
+
+
+
+
+     //});
+    //}
+
+    
     //finnhubClient.stockCandles("MDB", "30", currentTime - threeDaysAgo, currentTime, (error, data, response) => {
        //var times = data['t'];
        // currTime = times[times.length - 1];
@@ -195,8 +386,10 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 }
 **/
 
-userPreferences = getLocalStorageData();
-getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);}
+//debugger; 
+//let userPreferences = 
+getLocalStorageData();
+//getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]);
 
 
 // // const convertMain = require('./converter.js')
@@ -269,4 +462,4 @@ getStockPriceDifference(userPreferences[0],userPreferences[1],userPreferences[2]
 //     fetchClasses();
 //     // slider();
 //     console.log(event);
-// }
+// 
