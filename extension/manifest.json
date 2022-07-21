@@ -7,11 +7,12 @@
         "type": "module"
       },
     "content_scripts": [{
-        "matches": ["https://*.mongodb.com/*"],
+        "matches": ["https://www.mongodb.com/*"],
         "js": ["scripts/content.js", "scripts/main.js"]
     }],
     "permissions": ["storage", "tabs", "scripting"],  
     "action": {   
+        "default_icon": "Images/mongodblogo(5).png",
         "default_popup" : "basic.html"
     },    
     "manifest_version": 3
