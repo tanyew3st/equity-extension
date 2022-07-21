@@ -1,17 +1,4 @@
 
-
-//const finnhub = require('finnhub'); 
-//import finhub from 'finhub'; 
-//const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-
-
-//api_key.apiKey = "cbarv4aad3i91bfqbbug"
-//const finnhubClient = new finnhub.DefaultApi();
-
-
-console.log(
-    "HI WORLD"
-);
 var timeInterval = 'Hour';
 var higherThreshold = 1; 
 var lowerThreshold = -1; 
@@ -22,24 +9,7 @@ var lowerThreshold = -1;
 function getLocalStorageData(){
 
 
-    
-
-    /** 
-    const obj = {
-        "timePeriod" : 'Hour',
-        "lowerThreshold" : 1,
-        "higherThreshold" : -1,
-    }
-    debugger;
-    //window.localStorage.setItem("preferences", obj);
-    //console.log(window.localStorage);
-
-
-    chrome.storage.sync.set({'preferences':obj});
-    **/
-
     try{
-    //const userPrefs = window.localStorage.getItem('preferences');
     chrome.storage.sync.get("preferences",function(res){
         timeInterval = res['preferences']['timePeriod']; 
         higherThreshold = res['preferences']['higherThreshold']; 
@@ -50,18 +20,13 @@ function getLocalStorageData(){
        console.log(lowerThreshold);
 
     
-        console.log("oooh it worked!");
+       console.log("oooh it worked!");
 
         return getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold);
 
 
-       // return [timeInterval, higherThreshold, lowerThreshold]; 
+       
     })
-    //.error((error) => {
-
-   //});
-
-
     }
     // if user preferences are not set
     catch(error){
@@ -72,9 +37,6 @@ function getLocalStorageData(){
         return [timeInterval, higherThreshold, lowerThreshold]; 
     }
 
-
-
-   
 
 
 
