@@ -2788,15 +2788,6 @@ const updateColors = (color) => {
             element.style.borderBottomColor = "";
             element.style.borderColor = "";
             element.style.filter = "";
-
-            // element.style.backgroundColor = "white";
-            // console.log(element); 
-            // console.log(getComputedStyle(element, null).getPropertyValue("background-color"));  
-            // console.log(getComputedStyle(element, null).getPropertyValue("color"));  
-            // const one = (getComputedStyle(element, 'hover').getPropertyValue("box-shadow"));  
-            // const one = (getComputedStyle(element, null).getPropertyValue("color")); 
-            // const oneHexVersion = rgba2hex(one).substring(0, 7)
-            // element.style.color = updatedColor(oneHexVersion);
             
             const one = (getComputedStyle(element, null).getPropertyValue("color")); 
             if (one != "rgba(0, 0, 0, 0)") {
@@ -2857,14 +2848,31 @@ const updateColors = (color) => {
     return true;
 }
 
-const color = 1;
+let color = 1;
 
 let updated = false;
 let count = 1; 
-const intee = setInterval(() => {
-    updated = updateColors(color);
-    count++; 
-    if (count > 5) {
-        clearInterval(intee);
-    }
-}, 1000)
+
+const intervalFunction = () => {
+    chrome.storage.sync.get("color", function (obj) {
+        const intee = setInterval(() => {
+            if (obj['color']) {
+                color = obj['color']
+            } else {
+                color = 1; 
+            }
+            
+            console.log("setting the color to: " + color);
+            updated = updateColors(color);
+            count++; 
+            if (count > 5) {
+                clearInterval(intee);
+            }
+        }, 1000)
+    });
+
+
+}
+
+intervalFunction()
+const fetchInterval = setInterval(intervalFunction, 5000)
