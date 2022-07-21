@@ -113,11 +113,18 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         
                 console.log(color);
                 console.log(currPrice);
-                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
+                if(priceDiffPercentage > 0){
+                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+    
+                }
+                else{
+                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+                }
+                
 
                 chrome.storage.sync.set({"color":color});
                 chrome.storage.sync.set({"price":priceInfo});
-                document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
+                document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
         
                 return [color, currPrice];
      }); }
@@ -148,11 +155,18 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
             console.log(color);
 
             console.log(currPrice);
+            if(priceDiffPercentage > 0){
+                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+
+            }
+            else{
+                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+            }
     
-            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
+            //var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
             chrome.storage.sync.set({"color":color});
             chrome.storage.sync.set({"price":priceInfo});
-            document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
+            document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
 
             return [color, currPrice];
  }); }
@@ -183,11 +197,17 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         console.log(color);
 
         console.log(currPrice);
-        var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
+        if(priceDiffPercentage > 0){
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+
+        }
+        else{
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+        }
 
         chrome.storage.sync.set({"color":color});
         chrome.storage.sync.set({"price":priceInfo});
-        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
+        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
 
 
         return [color, currPrice];
@@ -196,6 +216,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 if (timeInterval == 'Month') {
     fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneMonthAgo) +
 "&to=" + (currentTime - oneMonthAgo) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
+        console.log(data);
         var t = data['t'];
         prevTime = t[t.length - 1];
         prevPrice = data['c'][t.length - 1];
@@ -220,11 +241,17 @@ if (timeInterval == 'Month') {
 
 
         console.log(currPrice);
-        var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + priceDiffPercentage + "%";
+        if(priceDiffPercentage > 0){
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+
+        }
+        else{
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+        }
 
         chrome.storage.sync.set({"color":color});
         chrome.storage.sync.set({"price":priceInfo});                
-        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Current Stock Price: $" + currPrice;
+        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
 
         return [color, currPrice];
        
