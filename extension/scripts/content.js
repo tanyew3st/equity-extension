@@ -2855,7 +2855,7 @@ let count = 1;
 
 const intervalFunction = () => {
     chrome.storage.sync.get("color", function (obj) {
-        const intee = setInterval(() => {
+        // const intee = setInterval(() => {
             if (obj['color']) {
                 color = obj['color']
             } else {
@@ -2868,7 +2868,7 @@ const intervalFunction = () => {
             if (count > 5) {
                 clearInterval(intee);
             }
-        }, 1000)
+        // }, 1000)
     });
 
 
