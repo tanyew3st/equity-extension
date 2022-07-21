@@ -49,7 +49,7 @@ const setPreferences = () => {
     let lowerThreshold;
     try {
         chrome.storage.sync.get("preferences", function (res) {
-            debugger;
+
             timeInterval = res['preferences']['timePeriod'];
             higherThreshold = res['preferences']['higherThreshold'];
             lowerThreshold = res['preferences']['lowerThreshold'];
@@ -63,7 +63,7 @@ const setPreferences = () => {
     }
     // if user preferences are not set
     catch (error) {
-        debugger;
+
         timeInterval = 'Hour';
         higherThreshold = 5;
         lowerThreshold = -5;
