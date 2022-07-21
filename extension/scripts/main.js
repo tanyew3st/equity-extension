@@ -106,11 +106,11 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
      
 
                 if(priceDiffPercentage > 0){
-                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "% on the Hour";
     
                 }
                 else{
-                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+                    var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "% on the Hour";
                 }
 
                 //color = 0; 
@@ -147,11 +147,11 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
     
 
             if(priceDiffPercentage > 0){
-                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "% on the Day";
 
             }
             else{
-                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+                var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "% on the Day";
             }
     
             chrome.storage.sync.set({"color":color});
@@ -185,11 +185,11 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 
 
         if(priceDiffPercentage > 0){
-            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "% on the Week";
 
         }
         else{
-            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "% on the Week";
         }
 
         chrome.storage.sync.set({"color":color});
@@ -226,11 +226,11 @@ if (timeInterval == 'Month') {
 
 
         if(priceDiffPercentage > 0){
-            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "% on the Month";
 
         }
         else{
-            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
+            var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "% on the Month";
         }
 
         chrome.storage.sync.set({"color":color});

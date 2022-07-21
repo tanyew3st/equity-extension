@@ -2862,7 +2862,11 @@ let updated = false;
 const intervalFunction = () => {
     chrome.storage.sync.get("color", function (obj) {
             color = obj['color']
-            color = 0
+
+            // if (color === 0) {
+                chrome.action.setIcon({ path: "Images/black_icon.png" })
+            // }
+            // color = 0
             console.log("setting the color to: " + color);
             updated = updateColors(color);
             // count++; 
@@ -2874,7 +2878,8 @@ const intervalFunction = () => {
 }
 
 
-
 intervalFunction();
 const fetchInterval = setInterval(intervalFunction, 5000)
-}, "2000")
+}, 2000)
+
+document.getElementsByClassName("fl-center-y")[0].innerHTML = "Stock";

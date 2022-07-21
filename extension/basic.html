@@ -22,7 +22,7 @@
 
 <body>
   <form style="margin: 1rem" id="preferences-form">
-    <em style="margin-bottom: 1rem" class="text text-primary">Select your time period and upper/lower threshold preferences for MDB below!</em>
+    <em style="margin-bottom: 1rem" class="text text-primary text-sm">Select your preferences. <span style="color:green">Green</span> will be displayed when the stock is up a percentage above the upper threshold, <span style="color:gray">Neutral</span> will be displayed when the stock percentage is between the upper and lower threshold, and <span style="color:red">Red</span> will be displayed if the stock change is below the lower threshold</em>
     <!-- Radio -->
     <br>
     <div style="margin-top: 1rem">
@@ -53,6 +53,7 @@
     </div>
     <!-- Slider -->
     <div class="row" style="margin-top: 1rem">
+      <em style="margin-bottom: 0.3rem" class="text-secondary">Lower Threshold</em>
       <div style="width: 80%;">
         <input id="lower-range" name="lower-range" form-range-track-bg="red" value="-5" min="-10" max="0"
           class="multi-range" type="range" style="width:100%" />
@@ -63,6 +64,7 @@
     </div>
     <br>
     <div class="row">
+      <em style="margin-bottom: 0.3rem" class="text-secondary">Upper Threshold</em>
       <div style="width: 80%">
         <input id="upper-range" value="5" min="0" max="10" class="multi-range" type="range" style="width:100%"/>
       </div>
