@@ -126,8 +126,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
             var t = data['t'];
             prevTime = t[t.length - 1];
             prevPrice = data['c'][t.length - 1];
-            console.log(prevTime);
-            console.log(prevPrice);
+
             var priceDifference = currPrice - prevPrice;
             var priceDiffPercentage = priceDifference / prevPrice;
             var color = '';
@@ -143,9 +142,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
                 color = 1;
             }
     
-            console.log(color);
 
-            console.log(currPrice);
             if(priceDiffPercentage > 0){
                 var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
 
@@ -154,7 +151,6 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
                 var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
             }
     
-            //var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
             chrome.storage.sync.set({"color":color});
             chrome.storage.sync.set({"price":priceInfo});
             document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
@@ -168,8 +164,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
         var t = data['t'];
         prevTime = t[t.length - 1];
         prevPrice = data['c'][t.length - 1];
-        console.log(prevTime);
-        console.log(prevPrice);
+
         var priceDifference = currPrice - prevPrice;
         var priceDiffPercentage = priceDifference / prevPrice;
         var color = '';
@@ -185,9 +180,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
             color = 1;
         }
 
-        console.log(color);
 
-        console.log(currPrice);
         if(priceDiffPercentage > 0){
             var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
 
@@ -205,16 +198,14 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
 }); }
 
 if (timeInterval == 'Month') {
-    console.log("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneMonthAgo - oneDayAgo) +
-    "&to=" + (currentTime - oneMonthAgo) + "&token=cbarv4aad3i91bfqbbug");
+
     fetch("https://finnhub.io/api/v1/stock/candle?symbol=MDB&resolution=60&from=" + (currentTime - threeDaysAgo - oneMonthAgo - oneDayAgo) +
 "&to=" + (currentTime - oneMonthAgo) + "&token=cbarv4aad3i91bfqbbug").then((response) =>{return response.json(); }).then((data) =>{
-        console.log(data);
+
         var t = data['t'];
         prevTime = t[t.length - 1];
         prevPrice = data['c'][t.length - 1];
-        console.log(prevTime);
-        console.log(prevPrice);
+
         var priceDifference = currPrice - prevPrice;
         var priceDiffPercentage = priceDifference / prevPrice;
         var color = '';
@@ -230,10 +221,7 @@ if (timeInterval == 'Month') {
             color = 1;
         }
 
-        console.log(color);
 
-
-        console.log(currPrice);
         if(priceDiffPercentage > 0){
             var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
 
