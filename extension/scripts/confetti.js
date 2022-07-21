@@ -1,29 +1,23 @@
-// When the button is clicked, inject setPageBackgroundColor into current page
-// throwConfetti.addEventListener("click", async () => {
-//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+const insertCanvas = () => {
+  const currBody = document.getElementsByTagName("body")[0];
+  const reactRoot = document.getElementsByClassName("react-root")[0];
+  var newCanvas = document.createElement("canvas");
+  newCanvas.setAttribute("id","canvas");
+  newCanvas.setAttribute("class", "confetti");
+  newCanvas.style.display = 'block';
+  newCanvas.style.margin = 0;
+  newCanvas.style.border = '1px';
+  newCanvas.style.position = 'absolute';
+  newCanvas.style.pointerEvents = 'none';
 
-//     chrome.scripting.executeScript({
-//         target: { tabId: tab.id },
-//         function: setPageBackgroundColor,
-//     });
-// });
-
-// The body of this function will be executed as a content script inside the
-// current page
-function playConfettiAnimation() {
-  // chrome.storage.sync.get("color", ({ color }) => {
-  //     document.body.style.backgroundColor = color;
-  // });
-  initConfetti();
+  currBody.insertBefore(newCanvas, reactRoot);
 }
 
-
-
-
+insertCanvas();
 
 
 //-----------Var Inits--------------
-const canvas = document.getElementById("yeet");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -120,24 +114,14 @@ const render = () => {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   });
 
-  // Fire off another round of confetti
-  if (confetti.length <= 10) initConfetti();
-
   window.requestAnimationFrame(render);
 };
 
-let changeColor = document.getElementById("changeColor");
-changeColor.addEventListener('click', function () {
+chrome.storage.sync.get("color", function (obj) {
+  var color = obj['color']
+  console.log("color: ", color);
+  if (color === 2) {
     initConfetti();
     render();
-});
-
-//----------Resize----------
-// window.addEventListener('resize', function () {
-//   resizeCanvas();
-// });
-
-//------------Click------------
-window.addEventListener('click', function () {
-  initConfetti();
+  }
 });

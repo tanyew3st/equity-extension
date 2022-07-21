@@ -8,7 +8,7 @@
       },
     "content_scripts": [{
         "matches": ["https://www.mongodb.com/*"],
-        "js": ["scripts/content.js", "scripts/main.js"]
+        "js": ["scripts/content.js", "scripts/main.js", "scripts/confetti.js"]
     }],
     "permissions": ["storage", "tabs", "scripting"],  
     "action": {   

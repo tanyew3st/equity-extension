@@ -2855,12 +2855,7 @@ let updated = false;
 
 const intervalFunction = () => {
     chrome.storage.sync.get("color", function (obj) {
-        // const intee = setInterval(() => {
-            if (obj['color']) {
-                color = obj['color']
-            } else {
-                color = 1; 
-            }
+            color = obj['color']
             
             console.log("setting the color to: " + color);
             updated = updateColors(color);
