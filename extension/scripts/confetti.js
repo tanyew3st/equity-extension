@@ -1,3 +1,6 @@
+setTimeout(() => {
+
+
 const insertCanvas = () => {
   const currBody = document.getElementsByTagName("body")[0];
   const reactRoot = document.getElementsByClassName("react-root")[0];
@@ -125,3 +128,4 @@ chrome.storage.sync.get("color", function (obj) {
     render();
   }
 });
+}, "2000")

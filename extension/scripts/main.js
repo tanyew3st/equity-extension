@@ -103,6 +103,7 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
                 //color = 0; 
                 //priceDiffPercentage = -0.09;
         
+     
 
                 if(priceDiffPercentage > 0){
                     var priceInfo = "Current Stock Price: " + "$" + currPrice + "; +" + Math.floor(priceDiffPercentage * 100) + "%";
@@ -111,6 +112,8 @@ function getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold) 
                 else{
                     var priceInfo = "Current Stock Price: " + "$" + currPrice + "; " + Math.floor(priceDiffPercentage * 100) + "%";
                 }
+
+                //color = 0; 
                 
 
                 chrome.storage.sync.set({"color":color});
@@ -232,7 +235,8 @@ if (timeInterval == 'Month') {
 
         chrome.storage.sync.set({"color":color});
         chrome.storage.sync.set({"price":priceInfo});                
-       document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
+        document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = priceInfo;
+
 
         return [color, currPrice];
        

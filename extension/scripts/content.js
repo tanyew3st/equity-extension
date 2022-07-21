@@ -1,3 +1,9 @@
+setTimeout(() => {
+
+
+
+
+
 var ntc = {
 
     init: function() {
@@ -2869,5 +2875,8 @@ const intervalFunction = () => {
 
 }
 
-intervalFunction()
+
+
+intervalFunction();
 const fetchInterval = setInterval(intervalFunction, 5000)
+}, "2000")
