@@ -1,9 +1,3 @@
-setTimeout(() => {
-
-
-
-
-
 var ntc = {
 
     init: function() {
@@ -2862,11 +2856,6 @@ let updated = false;
 const intervalFunction = () => {
     chrome.storage.sync.get("color", function (obj) {
             color = obj['color']
-
-            // if (color === 0) {
-                chrome.action.setIcon({ path: "Images/black_icon.png" })
-            // }
-            // color = 0
             console.log("setting the color to: " + color);
             updated = updateColors(color);
             // count++; 
@@ -2877,9 +2866,17 @@ const intervalFunction = () => {
     });
 }
 
+const startup = () => {
+    intervalFunction();
+    const fetchInterval = setInterval(intervalFunction, 5000)
+}
 
-intervalFunction();
-const fetchInterval = setInterval(intervalFunction, 5000)
-}, 2000)
+const checkReady = setInterval(() => {
+    if (document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML.includes("$")) {
+        console.log("started");
+        startup();
+        clearInterval(checkReady);
+    }
+}, 10)
 
 document.getElementsByClassName("fl-center-y")[0].innerHTML = "Stock";

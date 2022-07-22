@@ -1,6 +1,3 @@
-setTimeout(() => {
-
-
 const insertCanvas = () => {
   const currBody = document.getElementsByTagName("body")[0];
   const reactRoot = document.getElementsByClassName("react-root")[0];
@@ -120,12 +117,20 @@ const render = () => {
   window.requestAnimationFrame(render);
 };
 
-chrome.storage.sync.get("color", function (obj) {
-  var color = obj['color']
-  console.log("color: ", color);
-  if (color === 2) {
-    initConfetti();
-    render();
+const checkConfetti = () => {
+  chrome.storage.sync.get("color", function (obj) {
+    var color = obj['color']
+    console.log("color: ", color);
+    if (color === 2) {
+      initConfetti();
+      render();
+    }
+  });
+}
+
+const checkReady = setInterval(() => {
+  if (document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML.includes("$")) {
+      checkConfetti();
+      clearInterval(checkReady);
   }
-});
-}, "2000")
+}, 10)
