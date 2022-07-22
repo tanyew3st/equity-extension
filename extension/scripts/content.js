@@ -2856,7 +2856,6 @@ let updated = false;
 const intervalFunction = () => {
     chrome.storage.sync.get("color", function (obj) {
             color = obj['color']
-            console.log("setting the color to: " + color);
             updated = updateColors(color);
             // count++; 
             // if (count > 5) {
@@ -2873,7 +2872,6 @@ const startup = () => {
 
 const checkReady = setInterval(() => {
     if (document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML.includes("$")) {
-        console.log("started");
         startup();
         clearInterval(checkReady);
     }

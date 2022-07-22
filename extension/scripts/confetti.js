@@ -120,7 +120,6 @@ const render = () => {
 const checkConfetti = () => {
   chrome.storage.sync.get("color", function (obj) {
     var color = obj['color']
-    console.log("color: ", color);
     if (color === 2) {
       initConfetti();
       render();
@@ -128,9 +127,9 @@ const checkConfetti = () => {
   });
 }
 
-const checkReady = setInterval(() => {
+const checkReady2 = setInterval(() => {
   if (document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML.includes("$")) {
       checkConfetti();
-      clearInterval(checkReady);
+      clearInterval(checkReady2);
   }
 }, 10)

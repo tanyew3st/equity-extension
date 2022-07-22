@@ -11,30 +11,26 @@ var lowerThreshold = -1;
 function getLocalStorageData(){
      document.getElementsByClassName("PromoBanner__Title-sc-13lnlg-3")[0].innerHTML = "Stock Price Loading...";
 
-
-    try{
     chrome.storage.sync.get("preferences",function(res){
-        timeInterval = res['preferences']['timePeriod']; 
-        higherThreshold = res['preferences']['higherThreshold']; 
-        lowerThreshold = res['preferences']['lowerThreshold']; 
+        if (Object.keys(res).length > 0) {
+            timeInterval = res['preferences']['timePeriod']; 
+            higherThreshold = res['preferences']['higherThreshold']; 
+            lowerThreshold = res['preferences']['lowerThreshold']; 
+           return getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold);
 
-       return getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold);
-
-
-       
-    })
-    }
-    // if user preferences are not set
-    catch(error){
+        } else {
         timeInterval = 'Hour';
         higherThreshold = 1; 
         lowerThreshold = -1; 
-        return [timeInterval, higherThreshold, lowerThreshold]; 
-    }
-
-
-
-
+        const obj = {
+            "timePeriod": timeInterval,
+            "lowerThreshold": parseFloat(lowerThreshold) / 100,
+            "higherThreshold": parseFloat(higherThreshold) / 100,
+        }
+        chrome.storage.sync.set({ "preferences": obj });
+        return getStockPriceDifference(timeInterval, higherThreshold, lowerThreshold); 
+        }
+    })
 }
 
 function streamToString (stream) {
